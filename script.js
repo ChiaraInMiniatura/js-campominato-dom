@@ -25,6 +25,7 @@ document.querySelector("#btn_azzera").addEventListener("click", azzera);
 init();
 Livello();
 azzera();
+generaBombe();
 
 
 
@@ -36,6 +37,9 @@ function init(){
     const sq = creaQuadretto(container);
     // mettere i numeri nei quadretti
     sq.innerHTML = `<span> ${i} </span>`;
+
+    bomba = generaBombe (Livello);
+    console.log("bombe", bomba);
 
   
   }
@@ -83,7 +87,25 @@ function azzera(){
   container.innerHTML = "";
 }
 
-// 
+// numero random
+function numRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// funzione genera bombe
+function generaBombe(Livello ){
+  let arrayBombe = [];
+
+  while(arrayBombe.length <16){
+      bomba = numRandom(min, max);
+      if(!arrayBombe.includes(bomba)){
+          arrayBombe.push(bomba);
+      }
+  }
+  return arrayBombe;
+}
+console.log(arrayBombe)
+
 
 // Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell’esercizio ma solo l’index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l’inizializzazione di git).
 // ****L’utente indica un livello di difficoltà in base al quale viene generata una griglia di gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range:
