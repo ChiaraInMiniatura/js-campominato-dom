@@ -15,6 +15,9 @@
 const container = document.querySelector(".container");
 let bomba;
 let livelloSc;
+let arrayQuadretti = [];
+let arrayBombe = [];
+
 
 // selezione livelli
 
@@ -22,10 +25,10 @@ document.querySelector("#btn").addEventListener("click", init);
 document.querySelector("#btn_azzera").addEventListener("click", azzera);
 
 // chiamo funzioni
-init();
 Livello();
 azzera();
-
+init();
+generaBombe(1, Livello);
 
 
 // funzione di inizializzazione
@@ -37,11 +40,11 @@ function init(){
     // mettere i numeri nei quadretti
     sq.innerHTML = `<span> ${i} </span>`;
 
+    arrayQuadretti.push([i]);
   }
   
-  
 }
-
+console.log("arrayquadretti", arrayQuadretti);
 
 // funzione crea quadretti
 function creaQuadretto(target) {
@@ -67,7 +70,14 @@ function creaQuadretto(target) {
 
 function clickedSq(){
   console.log(this);
+
   this.classList.add("clicked");
+
+//   // aggiungere bomba
+//   if(arrayBombe.includes(this)){
+//     this.classList.add("bomba");
+// }
+  
 }
 
 // funzione livelli
@@ -76,7 +86,6 @@ function Livello(){
   livelloSc = livello.options[livello.selectedIndex].value;
   return livelloSc
 }
-console.log(livelloSc)
   
 // funzione per azzerare
 
@@ -90,23 +99,22 @@ function numRandom(min, max) {
 }
 
 // funzione genera bombe
-function generaBombe(min , max ){
+function generaBombe(min, max){
   
-  let arrayBombe = [];
+while(arrayBombe.length < 16){
 
-  while(arrayBombe.length < 16){
-
-    bomba = numRandom(1, Livello);
-
+    bomba = numRandom(1, 100);
     if(!arrayBombe.includes(bomba)){
-
       arrayBombe.push(bomba);
-
     }
+   }
+   console.log("array bombe", arrayBombe);
+   return arrayBombe;
+ };
 
-  }
+// funzione controllo risultati
 
-  console.log(arrayBombe);
-  return arrayBombe;
-}
+
+// }
+
 
